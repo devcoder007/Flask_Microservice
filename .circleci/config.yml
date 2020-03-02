@@ -15,7 +15,7 @@ jobs:
      # deploy the image
      - run:
         name: Login
-        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} https://rishabh-docker-twwiw.bintray.io/v1/auth
+        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} rishabh-docker-twwiw.bintray.io/v1/auth
      - run:
         name: Push docker container
         command: docker push rishabh-docker-twwiw.bintray.io/test/one:onre
