@@ -13,7 +13,6 @@ jobs:
      - run: docker build -t rishabh-docker-twwiw.bintray.io/test/one:onre .
 
      # deploy the image
-     - run: docker push rishabh-docker-twwiw.bintray.io/test/one:onre
      - run:
         name: Login
         command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} https://rishabh-docker-twwiw.bintray.io/v1/auth
