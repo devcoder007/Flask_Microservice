@@ -1,16 +1,23 @@
-version: 2
-jobs:
- build:
-   machine: true
-   steps:
-     - checkout
-     # start proprietary DB using private Docker image
-     # with credentials stored in the UI
-     - run: |
-         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+machine:
+  services:
+    - docker
 
-     # build the application image
-     - run: docker build -t rish1996/app:$CIRCLE_BRANCH .
+dependencies:
+  override:
+    - scripts/check-env-variables.sh
+    - VERSION=0.5.0 scripts/docker-docker.sh build
 
-     # deploy the image
-     - run: docker push rish1996/app:$CIRCLE_BRANCH
+test:
+  override:
+    - VERSION=0.5.0 scripts/docker-docker.sh test
+
+deployment:
+  bintray:
+    owner: packetloop
+    branch: [develop]
+    commands:
+      - VERSION=0.5.0 scripts/docker-docker.sh push
+  fork:
+    branch: /.*MAYH.*/
+    commands:
+      - VERSION=0.5.0 scripts/docker-docker.sh push
