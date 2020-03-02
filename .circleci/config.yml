@@ -10,7 +10,7 @@ jobs:
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
      # build the application image
-     - run: docker build -t rishabh-docker-twwiw.bintray.io/test/one:onre .
+     - run: docker build -t rishabh-docker-twwiw.bintray.io/test/one:onre src/.
 
      # deploy the image
      - run:
