@@ -1,0 +1,16 @@
+version: 2
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # start proprietary DB using private Docker image
+     # with credentials stored in the UI
+     - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+
+     # build the application image
+     - run: docker build -t rish1996/app:$CIRCLE_BRANCH .
+
+     # deploy the image
+     - run: docker push rish1996/app:$CIRCLE_BRANCH
