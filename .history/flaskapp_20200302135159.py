@@ -45,7 +45,7 @@ def index():
 
         print(AWS_ACCESS_KEY_ID,"id")
         print(AWS_SECRET_ACCESS_KEY,"key")
-        print(BUCKET_NAME, "bucket")
+        print(PUSH_OBJECT_BUCKET_NAME, "bucket")
         if "file" not in request.files:
             return "No user_file key in request.files"
         print(request.files)

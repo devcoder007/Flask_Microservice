@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-BUCKET_NAME = os.environ['BUCKET_NAME']
+PUSH_OBJECT_BUCKET_NAME = os.environ['PUSH_OBJECT_BUCKET_NAME']
 
 
 def upload_s3(file, bucket_name, object_key=None):
@@ -45,7 +45,7 @@ def index():
 
         print(AWS_ACCESS_KEY_ID,"id")
         print(AWS_SECRET_ACCESS_KEY,"key")
-        print(BUCKET_NAME, "bucket")
+        print(PUSH_OBJECT_BUCKET_NAME, "bucket")
         if "file" not in request.files:
             return "No user_file key in request.files"
         print(request.files)
@@ -64,7 +64,7 @@ def index():
         # if file and allowed_file(file.filename):
         print(type(file.filename))
         file.filename = secure_filename(file.filename)
-        output = upload_s3(file.filename, BUCKET_NAME)
+        output = upload_s3(file.filename, PUSH_OBJECT_BUCKET_NAME)
         return str(output)
     else:
         print("Not allowed")
