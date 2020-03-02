@@ -9,16 +9,12 @@ from werkzeug.datastructures import FileStorage
 # CONFIG
 app = Flask(__name__)
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-PUSH_OBJECT_BUCKET_NAME = os.environ['PUSH_OBJECT_BUCKET_NAME']
 
 def upload_s3(file, bucket_name, object_key=None):
   
     # create connection
-
-    s3 = boto3.client('s3', aws_access_key_id=AWS_ACCESS_KEY_ID,
-                      aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+    s3 = boto3.client('s3', aws_access_key_id="$AWS_ACCESS_KEY_ID",
+                      aws_secret_access_key="$AWS_SECRET_ACCESS_KEY")
     
     if object_key is None:
         date_obj = datetime.date.today()
@@ -58,7 +54,7 @@ def index():
         # if file and allowed_file(file.filename):
         print(type(file.filename))
         file.filename = secure_filename(file.filename)
-        output = upload_s3(file.filename, PUSH_OBJECT_BUCKET_NAME)
+        output = upload_s3(file.filename, "$PUSH_OBJECT_BUCKET_NAME")
         return str(output)
     else:
         print("Not allowed")
