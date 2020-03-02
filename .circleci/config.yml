@@ -8,7 +8,7 @@ jobs:
      # with credentials stored in the UI
      - run:
         name: Login
-        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} rishabh-docker-twwiw.bintray.io/v1/auth
+        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} rishabh-docker-twwiw.bintray.io
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
 
@@ -18,7 +18,7 @@ jobs:
      # deploy the image
      - run:
         name: Login
-        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} rishabh-docker-twwiw.bintray.io/v1/auth
+        command: docker login -u ${BINTRAY_USER} -p ${BINTRAY_API_KEY} rishabh-docker-twwiw.bintray.io
      - run:
         name: Push docker container
         command: docker push rishabh-docker-twwiw.bintray.io/test/one:onre
