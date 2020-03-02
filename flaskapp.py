@@ -9,9 +9,6 @@ from werkzeug.datastructures import FileStorage
 # CONFIG
 app = Flask(__name__)
 
-AWS_ACCESS_KEY_ID = 'AKIA37EQCWV5L44OVLEL'
-AWS_SECRET_ACCESS_KEY = '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'
-
 
 def upload_s3(file, bucket_name, object_key=None):
   
